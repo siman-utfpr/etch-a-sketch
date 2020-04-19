@@ -1,5 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
 :root {
-  --block-size: 50px;
+  --block-size: 25px;
 }
 
 #container {
@@ -11,4 +19,8 @@
 .grid-block {
   border: 1px solid red;
   text-align: center;
+}
+
+.colored-block {
+  background-color: blue;
 }

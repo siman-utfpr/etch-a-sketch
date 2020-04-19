@@ -1,4 +1,5 @@
 createGrid();
+addEventListeners();
 
 function createGrid() {
   const container = document.getElementById("container");
@@ -11,4 +12,15 @@ function createGrid() {
       container.appendChild(div);
     }
   }
+}
+
+function addEventListeners() {
+  const blocks = document.querySelectorAll(".grid-block");
+  blocks.forEach((block) => {
+    block.addEventListener("mouseover", changeBlockColor);
+  });
+}
+
+function changeBlockColor(evt) {
+  evt.target.classList.add("colored-block");
 }
