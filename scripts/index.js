@@ -8,6 +8,7 @@ function createGrid() {
       let div = document.createElement("div");
       div.setAttribute("id", `r${i}c${j}`);
       div.classList.add("grid-block");
+      div.addEventListener("mouseover", changeBlockColor);
       container.appendChild(div);
     }
   }
@@ -16,14 +17,13 @@ function createGrid() {
 function addEventListeners() {
   let clearGridButton = document.getElementById("clearButton");
   clearGridButton.addEventListener("click", clearGrid);
-  const blocks = document.querySelectorAll(".grid-block");
-  blocks.forEach((block) => {
-    block.addEventListener("mouseover", changeBlockColor);
-  });
 }
 
 function changeBlockColor(evt) {
-  evt.target.classList.add("colored-block");
+  if (evt.buttons == 1) {
+    evt.target.classList.add("colored-block");
+  }
+  console.log(evt);
 }
 
 function clearGrid() {
