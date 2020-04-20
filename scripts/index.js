@@ -12,6 +12,8 @@ function createGrid(n) {
       div.classList.add("grid-block");
       div.addEventListener("mouseover", changeBlockColor);
       div.addEventListener("mousedown", changeBlockColor);
+      div.addEventListener("touchstart", changeBlockColor);
+      div.addEventListener("touchmove", changeBlockColor);
 
       container.appendChild(div);
     }
@@ -30,8 +32,17 @@ function addEventListeners() {
 }
 
 function changeBlockColor(evt) {
-  if (evt.buttons == 1) {
+  if (evt.buttons == 1 || evt.type.includes("touch")) {
     evt.target.style.backgroundColor = currentColor;
+  }
+
+  if (evt.type === "touchmove") {
+    evt.preventDefault();
+    let [x, y] = [evt.changedTouches[0].clientX, evt.changedTouches[0].clientY];
+    let elementFromPoint = document.elementFromPoint(x, y);
+    if (elementFromPoint.classList.contains("grid-block")) {
+      elementFromPoint.style.backgroundColor = currentColor;
+    }
   }
 }
 
