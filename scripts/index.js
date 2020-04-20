@@ -1,12 +1,12 @@
 let currentColor = "black";
 
-createGrid();
+createGrid(16);
 addEventListeners();
 
-function createGrid() {
+function createGrid(n) {
   const container = document.getElementById("container");
-  for (let i = 1; i <= 16; i++) {
-    for (let j = 1; j <= 16; j++) {
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= n; j++) {
       let div = document.createElement("div");
       div.setAttribute("id", `r${i}c${j}`);
       div.classList.add("grid-block");
@@ -24,6 +24,9 @@ function addEventListeners() {
 
   let colorInput = document.getElementById("paintColor");
   colorInput.addEventListener("change", changePaintColor);
+
+  let numberDivsButton = document.getElementById("updateGridSize");
+  numberDivsButton.addEventListener("click", updateGridSize);
 }
 
 function changeBlockColor(evt) {
@@ -36,14 +39,31 @@ function changePaintColor(evt) {
   currentColor = evt.target.value;
 }
 
+function updateGridSize() {
+  let input = document.getElementById("gridSize");
+  let value = input.value;
+  let currentGridSize = document.documentElement.style.getPropertyValue(
+    "--grid-size"
+  );
+  if (validateGridSize(value)) {
+    clearContainer();
+    createGrid(value);
+    document.documentElement.style.setProperty("--grid-size", value);
+  } else {
+    input.value = currentGridSize;
+  }
+}
+
 function clearGrid() {
   let divs = document.querySelectorAll(".grid-block");
   divs.forEach((div) => (div.style.backgroundColor = ""));
 }
 
-function removeClassFromAllElements(className) {
-  let elements = document.getElementsByClassName(className);
-  while (elements.length) {
-    elements[0].classList.remove(className);
-  }
+function validateGridSize(value) {
+  return !isNaN(value) && value > 0 && isFinite(value);
+}
+
+function clearContainer() {
+  let container = document.getElementById("container");
+  container.innerHTML = "";
 }

@@ -3,8 +3,7 @@
 }
 
 :root {
-  --block-size: 25px;
-  --paint-color: black;
+  --grid-size: 16;
 }
 
 body {
@@ -20,8 +19,10 @@ body {
 
 #container {
   display: grid;
-  grid-template-columns: repeat(16, var(--block-size));
-  grid-template-rows: repeat(16, var(--block-size));
+  grid-template-columns: repeat(var(--grid-size), auto);
+  grid-template-rows: repeat(var(--grid-size), auto);
+  width: 500px;
+  height: 500px;
 }
 
 .grid-block {
