@@ -29,6 +29,12 @@ function addEventListeners() {
 
   let numberDivsButton = document.getElementById("updateGridSize");
   numberDivsButton.addEventListener("click", updateGridSize);
+
+  let borderStyleSelect = document.getElementById("borderStyle");
+  borderStyleSelect.addEventListener("change", changeBorderStyle);
+
+  let borderColorInput = document.getElementById("borderColor");
+  borderColorInput.addEventListener("change", changeBorderColor);
 }
 
 function changeBlockColor(evt) {
@@ -48,6 +54,20 @@ function changeBlockColor(evt) {
 
 function changePaintColor(evt) {
   currentColor = evt.target.value;
+}
+
+function changeBorderStyle(evt) {
+  document.documentElement.style.setProperty(
+    "--border-style",
+    evt.target.value
+  );
+}
+
+function changeBorderColor(evt) {
+  document.documentElement.style.setProperty(
+    "--border-color",
+    evt.target.value
+  );
 }
 
 function updateGridSize() {
