@@ -1,3 +1,5 @@
+let currentColor = "black";
+
 createGrid();
 addEventListeners();
 
@@ -9,6 +11,8 @@ function createGrid() {
       div.setAttribute("id", `r${i}c${j}`);
       div.classList.add("grid-block");
       div.addEventListener("mouseover", changeBlockColor);
+      div.addEventListener("mousedown", changeBlockColor);
+
       container.appendChild(div);
     }
   }
@@ -17,17 +21,24 @@ function createGrid() {
 function addEventListeners() {
   let clearGridButton = document.getElementById("clearButton");
   clearGridButton.addEventListener("click", clearGrid);
+
+  let colorInput = document.getElementById("paintColor");
+  colorInput.addEventListener("change", changePaintColor);
 }
 
 function changeBlockColor(evt) {
   if (evt.buttons == 1) {
-    evt.target.classList.add("colored-block");
+    evt.target.style.backgroundColor = currentColor;
   }
-  console.log(evt);
+}
+
+function changePaintColor(evt) {
+  currentColor = evt.target.value;
 }
 
 function clearGrid() {
-  removeClassFromAllElements("colored-block");
+  let divs = document.querySelectorAll(".grid-block");
+  divs.forEach((div) => (div.style.backgroundColor = ""));
 }
 
 function removeClassFromAllElements(className) {

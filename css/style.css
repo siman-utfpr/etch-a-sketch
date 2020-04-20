@@ -2,12 +2,20 @@
   box-sizing: border-box;
 }
 
+:root {
+  --block-size: 25px;
+  --paint-color: black;
+}
+
 body {
   margin: 0;
 }
 
-:root {
-  --block-size: 25px;
+#toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
 }
 
 #container {
@@ -20,8 +28,4 @@ body {
   border: 1px solid red;
   text-align: center;
   user-select: none;
-}
-
-.colored-block {
-  background-color: blue;
 }
